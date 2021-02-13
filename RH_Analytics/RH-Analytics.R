@@ -1,17 +1,5 @@
 # Projeto People Analytics - Quais Fatores Mais Causam Atritos no Ambiente de Trabalho?
 
-# Imports
-library(caret)
-library(ggplot2)
-library(gridExtra)
-library(data.table)
-library(car)
-library(caTools)
-library(corrplot)
-library(rpart)
-library(rpart.plot)
-
-
 # Carregando o dataset
 dados_rh <- fread('dados/dataset.csv')
 dim(dados_rh)
@@ -19,8 +7,8 @@ View(dados_rh)
 str(dados_rh)
 summary(dados_rh)
 
-##### Limpeza e Transformação ##### 
 
+##### Limpeza e Transformação ##### 
 # Transformando variáveis categóricas para o tipo fator
 View(dados_rh)
 dados_rh$Attrition                <- as.factor(dados_rh$Attrition)
@@ -55,8 +43,8 @@ str(dados_rh)
 summary(dados_rh)
 View(dados_rh)
 
-##### Engenharia de Atributos ##### 
 
+##### Engenharia de Atributos ##### 
 # Foi criado uma coluna de anos anteriores de experiência para visualizar melhor o perfil de 
 #experiência do funcionário.
 
@@ -76,7 +64,6 @@ View(dados_rh)
 
 
 # Substituímos valores como Inf para zero.
-
 summary(dados_rh$AverageTenure)
 dados_rh$AverageTenure[!is.finite(dados_rh$AverageTenure)] <- 0
 summary(dados_rh$AverageTenure)
@@ -85,16 +72,13 @@ View(dados_rh)
 
 # Analisamos e dividimos os dados como base na coluna Termination, que indica se 
 # o funcionário foi desligado da empresa.
-
 dados_rh_1 <- dados_rh[dados_rh$Attrition != 'Termination']
 dados_rh_1 <- droplevels(dados_rh_1)
 dim(dados_rh_1)
 summary(dados_rh_1)
 
 
-
 # Mesmo filtro anterior, mas agora por demissão voluntária
-
 dados_rh_2 <- dados_rh[dados_rh$Attrition != 'Voluntary Resignation']
 dados_rh_2 <-droplevels(dados_rh_2)
 dim(dados_rh_2)  
@@ -102,9 +86,7 @@ summary(dados_rh_2)
 
 
 
-
 ##### Análise Exploratória ##### 
-
 # Plots de análise univariada
 ggplot(dados_rh) + geom_bar(aes(x = Gender))
 ggplot(dados_rh) + geom_density(aes(x = Age))
