@@ -95,6 +95,7 @@ ggplot(dados_rh) + geom_bar(aes(x = Department))
 ggplot(dados_rh) + geom_bar(aes(x = JobRole))
 ggplot(dados_rh) + geom_bar(aes(x = Education)) + facet_grid(~EducationField)
 
+
 # Multiplot Grid
 p.TotalWorkingYears       <- ggplot(dados_rh) + geom_density(aes(TotalWorkingYears))
 p.YearsAtCompany          <- ggplot(dados_rh) + geom_density(aes(YearsAtCompany))
@@ -264,7 +265,6 @@ summary(modelo_v1)
 vif(modelo_v1)
 
 # Dados divididos em treino e teste. Vamos trabalhar com os dados sem registros de demitidos.
-set.seed(2004)
 index_treino <- sample.split(Y = dados_rh_1$Attrition, SplitRatio = 0.7)
 dados_rh_1_treino <- subset(dados_rh_1, train = T)
 dados_rh_1_teste <- subset(dados_rh_1, train = F)
